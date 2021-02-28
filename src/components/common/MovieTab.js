@@ -1,8 +1,8 @@
 import { React, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { clearMovieDetail } from "../actions/detailAction";
+import { clearMovieDetail } from "../../actions/detailAction";
 import { useDispatch } from "react-redux";
-import { starRating } from "../helper/starsRating";
+import { starRating } from "../../helper/starsRating";
 
 
 export function MovieTab({ title, genreid, rating, lang, movieID, poster }) {
@@ -94,11 +94,11 @@ export function MovieTab({ title, genreid, rating, lang, movieID, poster }) {
         <div>
           <img className="m-3" src={posterImageUrl + poster} alt="poster" />
         </div>
-        <div className="flex flex-col mt-3">
+        <div className=" mt-3">
           <h2 className="text-xl text-blue-600 w-96 font-medium">{title}</h2>
           <div>
             <p className="float-left mr-1">Genres:</p>
-            <div className="flex ">
+            <div className="inline-flex">
               {genreid ? (
                 genreid.map((data, index) => <p className="ml-2" key={index}>{genre(data)} </p>)
               ) : (

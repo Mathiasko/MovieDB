@@ -1,6 +1,6 @@
 import { React } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addMovieToAList, getMyLists } from "../actions/listActions";
+import { addMovieToAList, getMyLists } from "../../actions/listActions";
 
 export function AddToList({ movie }) {
   const dispatch = useDispatch();
@@ -10,12 +10,11 @@ export function AddToList({ movie }) {
   };
 
   const myLists = useSelector((state) => state.listFetch.myLists);
-  const sessionId = useSelector((state) => state.getNewToken.sessionId.session_id);
+  const sessionId = useSelector((state) => state.getNewToken.sessionId);
 
   const addMovieToListHandler = (listId) => {
     const movieId = {media_id: movie.id}
-    dispatch(addMovieToAList(listId, sessionId, movieId));
-    console.log(listId, sessionId, movieId)
+    dispatch(addMovieToAList(listId, sessionId.session_id, movieId));
   };
 
   return (

@@ -1,7 +1,7 @@
 import { React, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { searchMovie } from "../actions/searchMovieAction";
-import { MovieTab } from "./MovieTab";
+import { searchMovie } from "../../actions/searchMovieAction";
+import { MovieTab } from "../common/MovieTab";
 
 
 export function Search() {

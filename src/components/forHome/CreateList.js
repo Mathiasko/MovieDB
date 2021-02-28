@@ -1,6 +1,6 @@
 import { React, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { postNewList } from "../actions/listActions";
+import { postNewList } from "../../actions/listActions";
 
 export function CreateList() {
   const dispatch = useDispatch();

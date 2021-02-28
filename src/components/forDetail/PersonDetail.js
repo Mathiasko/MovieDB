@@ -12,7 +12,7 @@ export function PersonDetail({closeWindow}) {
 
   const person = useSelector((state) => state.personFetch.personDetail);
   return (
-    <div className="absolute w-2/3  bottom-48 right-28 bg-gray-700 text-gray-400">
+    <div className="fixed w-2/3 bottom-12 right-28 bg-gray-700 text-gray-400">
       <div className="absolute top-0 right-0 ">
         <button className="cursor-pointer text-3xl p-5 px-8" onClick={closeWindowHandler}>╳</button>
       </div>

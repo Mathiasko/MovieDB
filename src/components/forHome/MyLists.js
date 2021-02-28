@@ -1,6 +1,6 @@
 import { React, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getListDetail, getMyLists } from "../actions/listActions";
+import { getListDetail, getMyLists } from "../../actions/listActions";
 import { ListDetail } from "./ListDetail";
 
 export function MyLists() {

@@ -1,5 +1,5 @@
 import { React } from "react";
-import { starRating } from "../helper/starsRating";
+import { starRating } from "../../helper/starsRating";
 
 export function Review({ name, rating, review, date }) {
 

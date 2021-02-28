@@ -1,12 +1,12 @@
 import { React, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { mainFetch } from "../../actions/mainActions";
-import { Search } from "../Search";
-import { TopRated } from "../TopRated";
+import { Search } from "../forHome/Search";
+import { TopRated } from "../forHome/TopRated";
 import { useMeasure, useWindowScroll, useWindowSize } from "react-use";
-import { Authenticate } from "../Authenticate";
-import { CreateList } from "../CreateList";
-import { MyLists } from "../MyLists";
+import { Authenticate } from "../forHome/Authenticate";
+import { CreateList } from "../forHome/CreateList";
+import { MyLists } from "../forHome/MyLists";
 
 export function Home() {
   const dispatch = useDispatch();

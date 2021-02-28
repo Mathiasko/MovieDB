@@ -1,7 +1,7 @@
 import { React } from "react";
 import { useSelector } from "react-redux";
 
-import { MovieTab } from "./MovieTab";
+import { MovieTab } from "../common/MovieTab";
 export function TopRatedMovie() {
 
   const { topRatedMovies } = useSelector((state) => state.mainFetch);
