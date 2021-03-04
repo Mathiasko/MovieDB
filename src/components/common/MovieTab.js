@@ -107,7 +107,7 @@ export function MovieTab({ title, genreid, rating, lang, movieID, poster }) {
             </div>
 
             <p>
-              Rating: {starRating(rating)}{rating/2}
+              Rating: {starRating(rating)}
             </p>
 
             <p>Language: {lang.toUpperCase()}</p>
