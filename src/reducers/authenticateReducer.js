@@ -1,5 +1,6 @@
 const initState = {
   requestToken: [],
+  sessionId: [],
 };
 
 export const getNewToken = (state = initState, action) => {

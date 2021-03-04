@@ -27,6 +27,7 @@ function Detail() {
     dispatch(movieCastFetch(movieID));
     dispatch(movieRecommendationFetch(movieID));
     dispatch(reviewsFetch(movieID));
+    
   }, [movieID]);
 
   const [personToggle, setPersontoggle] = useState(false);

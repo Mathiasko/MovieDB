@@ -25,6 +25,8 @@ export function CreateList() {
     dispatch(postNewList(payload, sessionId));
   };
 
+
+
   return (
     <div className="">
       <form className="inline-flex flex-col relative" onSubmit={handleSubmit}>

@@ -4,7 +4,6 @@ import {
   createListUrl,
   getListDetailUrl,
   getListsUrl,
-  sessionIdUrl,
 } from "../api";
 
 export const postNewList = (payload, sessionId) => async (dispatch) => {
