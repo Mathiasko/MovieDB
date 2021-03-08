@@ -5,7 +5,7 @@ import { successHandler } from "../../helper/Notification";
 export function NotificationCenter() {
   const sessionSuccess = useSelector(
     (state) => state.getNewToken.sessionId.success
-  );
+  )
   useMemo(() => {
     if (sessionSuccess) {
       successHandler("Session ID granted");

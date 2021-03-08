@@ -7,10 +7,10 @@ import { getNewToken } from "./authenticateReducer";
 import { listFetch } from "./listReducer";
 
 export const rootReducer = combineReducers({
-  mainFetch: mainFetch,
-  detailFetch: detailFetch,
-  searchMovieFetch: searchMovieFetch,
-  personFetch: personFetch,
-  getNewToken: getNewToken,
-  listFetch: listFetch
+  mainFetch,
+  detailFetch,
+  searchMovieFetch,
+  personFetch,
+  getNewToken,
+  listFetch
 });

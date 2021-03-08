@@ -44,8 +44,6 @@ function Detail() {
 
   const dispatch = useDispatch();
 
-  console.log(personToggle);
-
   return (
     <div>
       {movie && externalIds && movieCast && movieRecommendation ? (

@@ -1,8 +1,8 @@
 import axios from "axios";
 import { topRatedMoviesUrl } from "../api";
 
-export const mainFetch = () => async (dispatch) => {
-  const topRatedMovies = await axios.get(topRatedMoviesUrl());
+export const mainFetch = (page) => async (dispatch) => {
+  const topRatedMovies = await axios.get(topRatedMoviesUrl(page));
   dispatch({
     type: "FETCH_MAIN",
     payload: {

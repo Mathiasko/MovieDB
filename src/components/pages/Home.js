@@ -11,7 +11,7 @@ import { MyLists } from "../forHome/MyLists";
 export function Home() {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(mainFetch());
+    dispatch(mainFetch(moviePage));
   });
 
   const { y: pageYOffest } = useWindowScroll();
@@ -21,21 +21,18 @@ export function Home() {
   let scrollHeight = height - windHeight + 96;
 
   const [toggleCreateList, setToggleCreateList] = useState(true);
-
-
-
-
+  const [moviePage, setMoviePage] = useState(1)
   return (
     <div ref={ref}>
       <div
-        className="fixed top-1 left-0 h-3 bg-red-400"
+        className="fixed top-1 left-0 h-3 bg-red-400 z-10"
         style={{ right: `${100 - (pageYOffest / scrollHeight) * 100}%` }}
       />
 
       <div className="flex">
-        <TopRated />
+        <TopRated moviePage={moviePage} setMoviePage={setMoviePage}/>
         <Search />
-        <div>
+        <div className='flex-1'>
           <Authenticate />
           <div>
             <p

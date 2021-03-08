@@ -1,6 +1,7 @@
 const initState = {
   myNewList: [],
   myLists: [],
+  movieInList: [],
 };
 
 export const listFetch = (state = initState, action) => {
@@ -21,6 +22,11 @@ export const listFetch = (state = initState, action) => {
         listDetail: action.payload.listDetail,
       };
     case "POST_MOVIETOLIST":
+      return {
+        ...state,
+        movieInList: action.payload.movieInList,
+      };
+    case "POST_REMOVEMOVIEFROMLIST":
       return {
         ...state,
         movieInList: action.payload.movieInList,

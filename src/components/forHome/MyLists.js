@@ -1,13 +1,17 @@
 import { React, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getListDetail, getMyLists } from "../../actions/listActions";
+import { errorHandler } from "../../helper/Notification";
 import { ListDetail } from "./ListDetail";
 
 export function MyLists() {
   const dispatch = useDispatch();
 
   const getListsHandler = () => {
-    dispatch(getMyLists(sessionId.session_id));
+    
+    sessionId.session_id
+      ? dispatch(getMyLists(sessionId.session_id))
+      : errorHandler("Session missing");
   };
   
   const sessionId = useSelector((state) => state.getNewToken.sessionId);
@@ -32,14 +36,14 @@ export function MyLists() {
       </p>
       <div className="flex">
         {myLists.map((list) => (
-          <div
-            className="text-white p-3"
+          <button
+            className="text-white text-left p-3"
             onClick={() => getListDetailHandler(list.id)}
           >
             <p>Name: {list.name}</p>
             <p>Desc: {list.description}</p>
             <p>Items: {list.item_count}</p>
-          </div>
+          </button>
         ))}
       </div>
       {detailToggle ? <ListDetail toggleDetail={setDetailToggle}/> : ''}

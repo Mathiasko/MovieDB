@@ -23,7 +23,7 @@ export function Search() {
 
 
   return (
-    <div className="mr-10">
+    <div className="mr-10 flex-1">
       <form className="m-8 mt-28" onSubmit={handleSubmit}>
         <label className='text-white'>
           Search movie:
@@ -31,7 +31,7 @@ export function Search() {
         </label>
         <input type="submit" className="ml-2 py-1 px-2" value="Submit" />
       </form>
-      <div >
+      <div className="overflow-auto" style={{ height: "74vh" }} >
           {results ? results.map((movie)=>(
               <MovieTab title={movie.title} genreid={movie.genre_ids} rating={movie.vote_average} lang={movie.original_language} movieID={movie.id} poster={movie.poster_path} key={movie.id}/>
           )): ''}

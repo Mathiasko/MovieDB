@@ -1,11 +1,20 @@
-import { React, useEffect } from "react";
+import { React } from "react";
 import { Link } from "react-router-dom";
 import { clearMovieDetail } from "../../actions/detailAction";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { starRating } from "../../helper/starsRating";
+import { removeMoveFromList } from "../../actions/listActions";
 
-
-export function MovieTab({ title, genreid, rating, lang, movieID, poster }) {
+export function MovieTab({
+  title,
+  genreid,
+  rating,
+  lang,
+  movieID,
+  poster,
+  remove,
+  listId,
+}) {
   const genre = (id) => {
     switch (id) {
       case 28:
@@ -78,42 +87,63 @@ export function MovieTab({ title, genreid, rating, lang, movieID, poster }) {
 
   const posterImageUrl = "https://image.tmdb.org/t/p/w92/";
 
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
+  const dispatch = useDispatch();
 
-  const dispatch = useDispatch()
-
-  const clearDetailHandler=()=> {
+  const clearDetailHandler = () => {
     dispatch(clearMovieDetail());
+  };
+  const sessionId = useSelector((state) => state.getNewToken.sessionId);
+
+  const removeMovieHandler=()=> {
+    const payload={media_id:movieID}
+    dispatch(
+      removeMoveFromList(listId, sessionId.session_id, payload)
+    )
+    console.log('dasdojb')
   }
 
   return (
-    <Link to={`/detail/${movieID}`} onClick={clearDetailHandler}>
-      <div className="flex my-2 bg-green-900" >
-        <div>
-          <img className="m-3" src={posterImageUrl + poster} alt="poster" />
-        </div>
-        <div className=" mt-3">
-          <h2 className="text-xl text-blue-600 w-96 font-medium">{title}</h2>
+    <div className="relative" >
+      <Link to={`/detail/${movieID}`} onClick={clearDetailHandler}>
+        <div className="flex my-2 bg-green-900" >
           <div>
-            <p className="float-left mr-1">Genres:</p>
-            <div className="inline-flex">
-              {genreid ? (
-                genreid.map((data, index) => <p className="ml-2" key={index}>{genre(data)} </p>)
-              ) : (
-                <p></p>
-              )}
+            <img className="m-3" src={posterImageUrl + poster} alt="poster" />
+          </div>
+          <div className=" mt-3">
+            <h2 className="text-xl text-blue-600 w-96 font-medium">{title}</h2>
+            <div>
+              <p className="float-left mr-1">Genres:</p>
+              <div className="inline-flex">
+                {genreid ? (
+                  genreid.map((data, index) => (
+                    <p className="ml-2" key={index}>
+                      {genre(data)}{" "}
+                    </p>
+                  ))
+                ) : (
+                  <p></p>
+                )}
+              </div>
+
+              <p>Rating: {starRating(rating)}</p>
+
+              <p>Language: {lang.toUpperCase()}</p>
             </div>
-
-            <p>
-              Rating: {starRating(rating)}
-            </p>
-
-            <p>Language: {lang.toUpperCase()}</p>
           </div>
         </div>
-      </div>
-    </Link>
+      </Link>
+      {remove ? (
+        <div>
+          <button
+            className="absolute top-10 -right-0 p-5 cursor-pointer"
+            onClick={removeMovieHandler}
+          >
+            ╳
+          </button>
+        </div>
+      ) : (
+        ""
+      )}
+    </div>
   );
 }
