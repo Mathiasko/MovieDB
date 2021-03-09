@@ -1,19 +1,26 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import PropTypes from "prop-types";
 import {
   faImdb,
   faFacebookSquare,
   faTwitterSquare,
   faInstagramSquare,
 } from "@fortawesome/free-brands-svg-icons";
-export function ExternalIds({externalIds}) {
+
+export function ExternalIds({
+  imdb_id,
+  facebook_id,
+  instagram_id,
+  twitter_id,
+}) {
   return (
     <>
-      {externalIds ? (
+      
         <div>
-          {externalIds.imdb_id ? (
+          {imdb_id ? (
             <a
-              href={`https://www.imdb.com/title/${externalIds.imdb_id}`}
+              href={`https://www.imdb.com/title/${imdb_id}`}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -33,9 +40,9 @@ export function ExternalIds({externalIds}) {
             />
           )}
 
-          {externalIds.facebook_id ? (
+          {facebook_id ? (
             <a
-              href={`https://www.facebook.com/${externalIds.facebook_id}`}
+              href={`https://www.facebook.com/${facebook_id}`}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -54,9 +61,9 @@ export function ExternalIds({externalIds}) {
               className="mr-2"
             />
           )}
-          {externalIds.instagram_id ? (
+          {instagram_id ? (
             <a
-              href={`https://www.instagram.com/${externalIds.instagram_id}`}
+              href={`https://www.instagram.com/${instagram_id}`}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -75,9 +82,9 @@ export function ExternalIds({externalIds}) {
               className="mr-2"
             />
           )}
-          {externalIds.twitter_id ? (
+          {twitter_id ? (
             <a
-              href={`https://www.twitter.com/${externalIds.twitter_id}`}
+              href={`https://www.twitter.com/${twitter_id}`}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -97,9 +104,13 @@ export function ExternalIds({externalIds}) {
             />
           )}
         </div>
-      ) : (
-        ""
-      )}
+      
     </>
   );
 }
+ExternalIds.propTypes = {
+  imdb_id: PropTypes.string.isRequired,
+  facebook_id: PropTypes.string.isRequired,
+  instagram_id: PropTypes.string.isRequired,
+  twitter_id: PropTypes.string.isRequired,
+};

@@ -2,6 +2,7 @@ import { React } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImdb } from "@fortawesome/free-brands-svg-icons";
 import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
 
 export function PersonDetail({closeWindow}) {
   const profileUrl = "https://image.tmdb.org/t/p/h632/";
@@ -64,3 +65,7 @@ export function PersonDetail({closeWindow}) {
     </div>
   );
 }
+
+PersonDetail.propTypes = {
+  closeWindow: PropTypes.func.isRequired,
+};

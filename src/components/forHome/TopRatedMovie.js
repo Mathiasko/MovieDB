@@ -1,5 +1,6 @@
 import { React, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
 
 import { MovieTab } from "../common/MovieTab";
 import { MoviePage } from "./MoviePage";
@@ -37,3 +38,8 @@ export function TopRatedMovie({ setMoviePage, moviePage }) {
     </div>
   );
 }
+
+TopRatedMovie.propTypes = {
+  setMoviePage: PropTypes.func.isRequired,
+  moviePage: PropTypes.number.isRequired
+};

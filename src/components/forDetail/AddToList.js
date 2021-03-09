@@ -1,7 +1,8 @@
 import { React, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addMovieToAList, getMyLists } from "../../actions/listActions";
+import { addMovieToAList, getMyLists } from "../../redux/actions/listActions";
 import { errorHandler } from "../../helper/Notification";
+import PropTypes from "prop-types";
 
 export function AddToList({ movie }) {
   const dispatch = useDispatch();
@@ -39,7 +40,7 @@ export function AddToList({ movie }) {
             <div>
               <ul>
                 {myLists.map((list) => (
-                  <li onClick={() => addMovieToListHandler(list.id)}>
+                  <li key={list.id} onClick={() => addMovieToListHandler(list.id)}>
                     <button className='text-lg'>{list.name}</button>
                   </li>
                 ))}
@@ -52,4 +53,10 @@ export function AddToList({ movie }) {
       )}
     </div>
   );
+}
+
+AddToList.propTypes={
+  movie: PropTypes.object.isRequired,
+  id: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
 }

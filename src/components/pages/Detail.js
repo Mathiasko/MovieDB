@@ -10,7 +10,7 @@ import {
   movieCastFetch,
   movieRecommendationFetch,
   reviewsFetch,
-} from "../../actions/detailAction";
+} from "../../redux/actions/detailAction";
 import { Review } from "../forDetail/Review";
 import { AddToList } from "../forDetail/AddToList";
 import { MovieProduction } from "../forDetail/MovieProdiction";
@@ -27,7 +27,6 @@ function Detail() {
     dispatch(movieCastFetch(movieID));
     dispatch(movieRecommendationFetch(movieID));
     dispatch(reviewsFetch(movieID));
-    
   }, [movieID]);
 
   const [personToggle, setPersontoggle] = useState(false);
@@ -57,7 +56,13 @@ function Detail() {
             <AddToList movie={movie} />
           </div>
           <div className="ml-10 mt-5 flex-1">
-           <MovieMeta movie={movie}/>
+            <MovieMeta
+              title={movie.title}
+              release_date={movie.release_date}
+              runtime={movie.runtime}
+              vote_average={movie.vote_average}
+              overview={movie.overview}
+            />
             <div className="text-white text-xl mt-10">
               <p>Production:</p>
 
@@ -67,7 +72,7 @@ function Detail() {
             </div>
             <div className="text-white text-xl mt-10">
               <p>External</p>
-              <ExternalIds externalIds={externalIds} />
+              <ExternalIds imdb_id={externalIds.imdb_id} facebook_id={externalIds.facebook_id} instagram_id={externalIds.instagram_id} twitter_id={externalIds.twitter_id} />
             </div>
             <div className="text-white w-2/3   absolute text-base mt-10 whitespace-nowrap overflow-auto">
               <MovieCast
@@ -88,6 +93,7 @@ function Detail() {
                 <div className="text-white flex flex-wrap">
                   {movieReviews.map((review) => (
                     <Review
+                    key={review.id}
                       name={review.author}
                       rating={review.author_details.rating}
                       review={review.content}
@@ -103,7 +109,7 @@ function Detail() {
               {movieRecommendation ? (
                 <div className="flex flex-wrap">
                   {movieRecommendation.map((movRec) => (
-                    <div className=" mr-5 inline-block ">
+                    <div key={movRec.id} className=" mr-5 inline-block ">
                       <MovieTab
                         title={movRec.title}
                         genreid={movRec.genre_ids}
@@ -111,7 +117,6 @@ function Detail() {
                         lang={movRec.original_language}
                         movieID={movRec.id}
                         poster={movRec.poster_path}
-                        key={movRec.id}
                       />
                     </div>
                   ))}

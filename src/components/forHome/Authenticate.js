@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getNewToken, getSessionID } from "../../actions/authenticateActions";
+import { getNewToken, getSessionID } from "../../redux/actions/authenticateActions";
 
 export function Authenticate() {
   const dispatch = useDispatch();

@@ -1,11 +1,12 @@
 import { React } from "react";
 import { Link } from "react-router-dom";
-import { clearMovieDetail } from "../../actions/detailAction";
+import { clearMovieDetail } from "../../redux/actions/detailAction";
 import { useDispatch, useSelector } from "react-redux";
 import { starRating } from "../../helper/starsRating";
-import { removeMoveFromList } from "../../actions/listActions";
+import { removeMoveFromList } from "../../redux/actions/listActions";
+import PropTypes from "prop-types";
 
-export function MovieTab({
+export const MovieTab = ({
   title,
   genreid,
   rating,
@@ -14,7 +15,7 @@ export function MovieTab({
   poster,
   remove,
   listId,
-}) {
+}) => {
   const genre = (id) => {
     switch (id) {
       case 28:
@@ -114,15 +115,11 @@ export function MovieTab({
             <div>
               <p className="float-left mr-1">Genres:</p>
               <div className="inline-flex">
-                {genreid ? (
-                  genreid.map((data, index) => (
+                {genreid.map((data, index) => (
                     <p className="ml-2" key={index}>
                       {genre(data)}{" "}
                     </p>
-                  ))
-                ) : (
-                  <p></p>
-                )}
+                  ))}
               </div>
 
               <p>Rating: {starRating(rating)}</p>
@@ -146,4 +143,15 @@ export function MovieTab({
       )}
     </div>
   );
+}
+
+MovieTab.propTypes={
+  title: PropTypes.string.isRequired,
+  genreid: PropTypes.string.isRequired,
+  rating: PropTypes.number.isRequired,
+  lang: PropTypes.string.isRequired,
+  movieID: PropTypes.string.isRequired,
+  poster: PropTypes.string.isRequired,
+  remove: PropTypes.string.isRequired,
+  listId: PropTypes.string.isRequired,
 }

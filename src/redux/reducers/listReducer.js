@@ -1,3 +1,4 @@
+import * as actionType from '../actions/actionTypes'
 const initState = {
   myNewList: [],
   myLists: [],
@@ -6,27 +7,27 @@ const initState = {
 
 export const listFetch = (state = initState, action) => {
   switch (action.type) {
-    case "POST_NEWLIST":
+    case actionType.POST_NEWLIST:
       return {
         ...state,
         myNewList: action.payload.myNewList,
       };
-    case "GET_MYLISTS":
+    case actionType.GET_MYLISTS:
       return {
         ...state,
         myLists: action.payload.myLists.results,
       };
-    case "GET_LISTSDETAIL":
+    case actionType.GET_LISTSDETAIL:
       return {
         ...state,
         listDetail: action.payload.listDetail,
       };
-    case "POST_MOVIETOLIST":
+    case actionType.POST_MOVIETOLIST:
       return {
         ...state,
         movieInList: action.payload.movieInList,
       };
-    case "POST_REMOVEMOVIEFROMLIST":
+    case actionType.POST_REMOVEMOVIEFROMLIST:
       return {
         ...state,
         movieInList: action.payload.movieInList,

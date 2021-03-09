@@ -1,10 +1,11 @@
 import axios from "axios";
-import { personDetailUrl } from "../api";
+import { personDetailUrl } from "../../api";
+import * as actionType from './actionTypes'
 
 export const personDetailFetch = (personId) => async (dispatch) => {
   const personDetail = await axios.get(personDetailUrl(personId));
   dispatch({
-    type: "FETCH_PERSON",
+    type: actionType.FETCH_PERSON,
     payload: {
       personDetail: personDetail.data,
     },

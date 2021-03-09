@@ -1,8 +1,9 @@
 import { React, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getListDetail, getMyLists } from "../../actions/listActions";
+import { getListDetail, getMyLists } from "../../redux/actions/listActions";
 import { errorHandler } from "../../helper/Notification";
 import { ListDetail } from "./ListDetail";
+
 
 export function MyLists() {
   const dispatch = useDispatch();
@@ -37,6 +38,7 @@ export function MyLists() {
       <div className="flex">
         {myLists.map((list) => (
           <button
+          key={list.id}
             className="text-white text-left p-3"
             onClick={() => getListDetailHandler(list.id)}
           >
@@ -51,3 +53,4 @@ export function MyLists() {
     </div>
   );
 }
+

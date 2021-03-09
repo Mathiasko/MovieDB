@@ -1,6 +1,6 @@
 import { React, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { mainFetch } from "../../actions/mainActions";
+import { mainFetch } from "../../redux/actions/mainActions";
 import { Search } from "../forHome/Search";
 import { TopRated } from "../forHome/TopRated";
 import { useMeasure, useWindowScroll, useWindowSize } from "react-use";

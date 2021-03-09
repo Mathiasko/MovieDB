@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { personDetailFetch } from "../../actions/detailPersonActions";
+import { personDetailFetch } from "../../redux/actions/detailPersonActions";
+import PropTypes from "prop-types";
 
 
 
@@ -45,3 +46,8 @@ export function MovieCast({movieCast, setPersontoggle}) {
     </>
   );
 }
+
+MovieCast.propTypes = {
+  movieCast: PropTypes.array.isRequired,
+  setPersontoggle: PropTypes.func.isRequired
+};

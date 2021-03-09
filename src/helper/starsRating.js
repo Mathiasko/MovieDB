@@ -1,6 +1,7 @@
 import { faStar, faStarHalfAlt } from "@fortawesome/free-solid-svg-icons";
 import { faStar as faStarE } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from 'react'
 
 export const starRating = (rating) => {
   const stars = [];

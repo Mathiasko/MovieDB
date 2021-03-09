@@ -1,35 +1,37 @@
+import * as actionType from '../actions/actionTypes'
+
 const initState = {
   
 };
 
 export const detailFetch = (state = initState, action) => {
   switch (action.type) {
-    case "FETCH_DETAIL":
+    case actionType.FETCH_DETAIL:
       return {
         ...state,
         movieDetail: action.payload.movieDetail,
       };
-    case "FETCH_EXTERNALIDS":
+    case actionType.FETCH_EXTERNALIDS:
       return {
         ...state,
         externalIds: action.payload.externalIds,
       };
-    case "FETCH_MOVIECAST":
+    case actionType.FETCH_MOVIECAST:
       return {
         ...state,
         movieCast: action.payload.movieCast,
       };
-    case "FETCH_MOVIERECOMMENDATION":
+    case actionType.FETCH_MOVIERECOMMENDATION:
       return {
         ...state,
         movieRecommendation: action.payload.movieRecommendation,
       };
-    case "FETCH_MOVIEREVIEWS":
+    case actionType.FETCH_MOVIEREVIEWS:
       return {
         ...state,
         movieReviews: action.payload.movieReviews,
       };
-    case "CLEAR_DETAIL":
+    case actionType.CLEAR_DETAIL:
       return {
         ...state,
         movieDetail: null,

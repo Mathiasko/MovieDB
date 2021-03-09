@@ -5,13 +5,14 @@ import {
   getListDetailUrl,
   getListsUrl,
   removeFromListUrl,
-} from "../api";
-import { errorHandler, successHandler } from "../helper/Notification";
+} from "../../api";
+import { errorHandler, successHandler } from "../../helper/Notification";
+import * as actionType from './actionTypes'
 
 export const postNewList = (payload, sessionId) => async (dispatch) => {
   const newList = await axios.post(createListUrl(sessionId), payload);
   dispatch({
-    type: "POST_NEWLIST",
+    type: actionType.POST_NEWLIST,
     payload: {
       myNewList: newList.data,
     },
@@ -21,7 +22,7 @@ export const postNewList = (payload, sessionId) => async (dispatch) => {
 export const getMyLists = (sessionId) => async (dispatch) => {
   const myLists = await axios.get(getListsUrl(sessionId));
   dispatch({
-    type: "GET_MYLISTS",
+    type: actionType.GET_MYLISTS,
     payload: {
       myLists: myLists.data,
     },
@@ -31,7 +32,7 @@ export const getMyLists = (sessionId) => async (dispatch) => {
 export const getListDetail = (listId) => async (dispatch) => {
   const listDetail = await axios.get(getListDetailUrl(listId));
   dispatch({
-    type: "GET_LISTSDETAIL",
+    type: actionType.GET_LISTSDETAIL,
     payload: {
       listDetail: listDetail.data,
     },
@@ -48,7 +49,7 @@ export const addMovieToAList = (listId, sessionId, payload) => async (dispatch) 
     errorHandler('This movie is in the list already!')
   })
   dispatch({
-    type: "POST_MOVIETOLIST",
+    type: actionType.POST_MOVIETOLIST,
     payload: {
       movieInList: movieInList.data,
     },
@@ -66,7 +67,7 @@ export const removeMoveFromList = (listId, sessionId, payload) => async (dispatc
     errorHandler('Error')
   })
   dispatch({
-    type: "POST_REMOVEMOVIEFROMLIST",
+    type: actionType.POST_REMOVEMOVIEFROMLIST,
     payload: {
       movieInList: movieInList.data,
     },
