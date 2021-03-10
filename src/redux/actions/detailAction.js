@@ -1,17 +1,26 @@
-import axios from "axios";
 import {
-  movieCastUrl,
-  // movieDetailUrl,
-  movieExternalUrl,
-  movieRecommendationUrl,
-  movieReviewsUrl,
-} from "../../api/apiUrl";
-import {movieDetail} from "../../api/movieDetailApi";
+  movieDetail,
+  externalIds,
+  movieCast,
+  movieRecommendation,
+  movieReviews,
+} from "../../api/apiCalls";
 import * as actionType from "./actionTypes";
 
 export function detailFetchSuccess(movie) {
-  console.log('was here', movie)
   return { type: actionType.FETCH_DETAIL, movie };
+}
+export function externalIdsFetchSuccess(externalIds) {
+  return { type: actionType.FETCH_EXTERNALIDS, externalIds };
+}
+export function movieCastFetchSuccess(movieCast) {
+  return { type: actionType.FETCH_MOVIECAST, movieCast };
+}
+export function movieRecommendationFetchSuccess(movieRecommendation) {
+  return { type: actionType.FETCH_MOVIERECOMMENDATION, movieRecommendation };
+}
+export function movieReviewsFetchSuccess(movieReviews) {
+  return { type: actionType.FETCH_MOVIEREVIEWS, movieReviews };
 }
 
 export const detailFetch = (id) => (dispatch) =>
@@ -23,56 +32,45 @@ export const detailFetch = (id) => (dispatch) =>
       throw error;
     });
 
-// {
-//   const movieDetail =  axios.get(movieDetailUrl(id));
+export const externalIdsFetch = (id) => (dispatch) =>
+  externalIds(id)
+    .then((externalIds) => {
+      dispatch(externalIdsFetchSuccess(externalIds.data));
+    })
+    .catch((error) => {
+      throw error;
+    });
 
-//   dispatch({
-//     type: actionType.FETCH_DETAIL,
-//     payload: {
-//       movieDetail: movieDetail.data,
-//     },
-//   });
-// };
+export const movieCastFetch = (id) => (dispatch) =>
+  movieCast(id)
+    .then((movieCast) => {
+      dispatch(movieCastFetchSuccess(movieCast.data.cast.slice(0, 15)));
+    })
+    .catch((error) => {
+      throw error;
+    });
 
-export const externalIdsFetch = (id) => async (dispatch) => {
-  const externalIds = await axios.get(movieExternalUrl(id));
-  dispatch({
-    type: actionType.FETCH_EXTERNALIDS,
-    payload: {
-      externalIds: externalIds.data,
-    },
-  });
-};
+export const movieRecommendationFetch = (id) => (dispatch) =>
+  movieRecommendation(id)
+    .then((movieRecommendation) => {
+      dispatch(
+        movieRecommendationFetchSuccess(
+          movieRecommendation.data.results.slice(0, 8)
+        )
+      );
+    })
+    .catch((error) => {
+      throw error;
+    });
 
-export const movieCastFetch = (id) => async (dispatch) => {
-  const movieCast = await axios.get(movieCastUrl(id));
-  dispatch({
-    type: actionType.FETCH_MOVIECAST,
-    payload: {
-      movieCast: movieCast.data.cast.slice(0, 15),
-    },
-  });
-};
-
-export const movieRecommendationFetch = (id) => async (dispatch) => {
-  const movieRecommendation = await axios.get(movieRecommendationUrl(id));
-  dispatch({
-    type: actionType.FETCH_MOVIERECOMMENDATION,
-    payload: {
-      movieRecommendation: movieRecommendation.data.results.slice(0, 8),
-    },
-  });
-};
-
-export const reviewsFetch = (id) => async (dispatch) => {
-  const movieReviews = await axios.get(movieReviewsUrl(id));
-  dispatch({
-    type: actionType.FETCH_MOVIEREVIEWS,
-    payload: {
-      movieReviews: movieReviews.data.results,
-    },
-  });
-};
+export const reviewsFetch = (id) => (dispatch) =>
+  movieReviews(id)
+    .then((movieReviews) => {
+      dispatch(movieReviewsFetchSuccess(movieReviews.data.results));
+    })
+    .catch((error) => {
+      throw error;
+    });
 
 export const clearMovieDetail = () => (dispatch) => {
   dispatch({

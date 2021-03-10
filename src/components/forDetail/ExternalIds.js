@@ -109,8 +109,8 @@ export const ExternalIds =({
   );
 }
 ExternalIds.propTypes = {
-  imdb_id: PropTypes.string.isRequired,
-  facebook_id: PropTypes.string.isRequired,
-  instagram_id: PropTypes.string.isRequired,
-  twitter_id: PropTypes.string.isRequired,
+  imdb_id: PropTypes.string,
+  facebook_id: PropTypes.string,
+  instagram_id: PropTypes.string,
+  twitter_id: PropTypes.string,
 };

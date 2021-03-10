@@ -7,8 +7,8 @@ export default {
     sessionId: [],
   },
   detail: {
-    movieDetail: [],
-    externalIds: [],
+    movieDetail: {},
+    externalIds: {},
     movieCast: [],
     movieRecommendation: [],
     movieReviews: [],

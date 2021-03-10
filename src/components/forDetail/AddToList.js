@@ -58,8 +58,8 @@ const AddToList =({ movie, getMyLists, addMovieToAList }) => {
 
 AddToList.propTypes = {
   movie: PropTypes.object.isRequired,
-  id: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
+  id: PropTypes.number,
+  title: PropTypes.string,
   getMyLists: PropTypes.func.isRequired,
   addMovieToAList: PropTypes.func.isRequired,
 };

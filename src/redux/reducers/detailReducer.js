@@ -4,7 +4,6 @@ import initialState from "./initialState";
 export const detailFetch = (state = initialState.detail, action) => {
   switch (action.type) {
     case actionType.FETCH_DETAIL:
-      // console.log(action)
       return {
         ...state,
         movieDetail: action.movie,
@@ -12,30 +11,30 @@ export const detailFetch = (state = initialState.detail, action) => {
     case actionType.FETCH_EXTERNALIDS:
       return {
         ...state,
-        externalIds: action.payload.externalIds,
+        externalIds: action.externalIds,
       };
     case actionType.FETCH_MOVIECAST:
       return {
         ...state,
-        movieCast: action.payload.movieCast,
+        movieCast: action.movieCast,
       };
     case actionType.FETCH_MOVIERECOMMENDATION:
       return {
         ...state,
-        movieRecommendation: action.payload.movieRecommendation,
+        movieRecommendation: action.movieRecommendation,
       };
     case actionType.FETCH_MOVIEREVIEWS:
       return {
         ...state,
-        movieReviews: action.payload.movieReviews,
+        movieReviews: action.movieReviews,
       };
     case actionType.CLEAR_DETAIL:
       return {
         ...state,
-        movieDetail: null,
-        externalIds: null,
-        movieCast: null,
-        movieRecommendation: null,
+        movieDetail: {},
+        externalIds: {},
+        movieCast: [],
+        movieRecommendation: [],
       };
     default:
       return { ...state };

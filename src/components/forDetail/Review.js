@@ -25,9 +25,9 @@ export function Review({ name, rating, review, date }) {
 }
 
 Review.propTypes = {
-  closeWindow: PropTypes.func.isRequired,
+  closeWindow: PropTypes.func,
   name: PropTypes.string.isRequired,
-  rating: PropTypes.number.isRequired,
-  review: PropTypes.string.isRequired,
-  date: PropTypes.number.isRequired,
+  rating: PropTypes.number,
+  review: PropTypes.string,
+  date: PropTypes.string.isRequired,
 };

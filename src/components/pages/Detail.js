@@ -13,7 +13,7 @@ import {
 } from "../../redux/actions/detailAction";
 import { Review } from "../forDetail/Review";
 import AddToList from "../forDetail/AddToList";
-// import { MovieProduction } from "../forDetail/MovieProdiction"
+import { MovieProduction } from "../forDetail/MovieProdiction"
 import { ExternalIds } from "../forDetail/ExternalIds";
 import MovieCast from "../forDetail/MovieCast";
 import { MovieMeta } from "../forDetail/MovieMeta";
@@ -69,7 +69,7 @@ const Detail = ({
               <p>Production:</p>
 
               <div className="flex mt-5">
-                {/* <MovieProduction movie={movie} /> */}
+                <MovieProduction production_companies={movie.production_companies} />
               </div>
             </div>
             <div className="text-white text-xl mt-10">
@@ -149,9 +149,9 @@ Detail.propTypes = {
   reviewsFetch: PropTypes.func.isRequired,
   movie: PropTypes.object.isRequired,
   externalIds: PropTypes.object.isRequired,
-  movieCast: PropTypes.object.isRequired,
-  movieRecommendation: PropTypes.object.isRequired,
-  movieReviews: PropTypes.object.isRequired,
+  movieCast: PropTypes.array.isRequired,
+  movieRecommendation: PropTypes.array.isRequired,
+  movieReviews: PropTypes.array.isRequired,
 };
 
 function mapStateToProps(state) {

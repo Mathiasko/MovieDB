@@ -91,7 +91,7 @@ const MovieTab = ({
   const posterImageUrl = "https://image.tmdb.org/t/p/w92/";
 
   const clearDetailHandler = () => {
-    clearMovieDetail()
+      clearMovieDetail()
   };
   const sessionId = useSelector((state) => state.getNewToken.sessionId);
 
