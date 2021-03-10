@@ -1,18 +1,16 @@
 import { React, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { addMovieToAList, getMyLists } from "../../redux/actions/listActions";
 import { errorHandler } from "../../helper/Notification";
 import PropTypes from "prop-types";
 
-export function AddToList({ movie }) {
-  const dispatch = useDispatch();
-
+const AddToList =({ movie, getMyLists, addMovieToAList }) => {
   const getListsHandler = () => {
     sessionId.session_id ? successAdd() : errorHandler("Session missing");
   };
 
   function successAdd() {
-    dispatch(getMyLists(sessionId.session_id));
+    getMyLists(sessionId.session_id);
     setAddToList(true);
   }
 
@@ -21,7 +19,7 @@ export function AddToList({ movie }) {
 
   const addMovieToListHandler = (listId) => {
     const movieId = { media_id: movie.id };
-    dispatch(addMovieToAList(listId, sessionId.session_id, movieId));
+    addMovieToAList(listId, sessionId.session_id, movieId);
   };
 
   const [addToList, setAddToList] = useState(false);
@@ -36,12 +34,15 @@ export function AddToList({ movie }) {
       {addToList ? (
         <div className="mt-5">
           <div>
-            <p className='text-xl underline'>Select list:</p>
+            <p className="text-xl underline">Select list:</p>
             <div>
               <ul>
                 {myLists.map((list) => (
-                  <li key={list.id} onClick={() => addMovieToListHandler(list.id)}>
-                    <button className='text-lg'>{list.name}</button>
+                  <li
+                    key={list.id}
+                    onClick={() => addMovieToListHandler(list.id)}
+                  >
+                    <button className="text-lg">{list.name}</button>
                   </li>
                 ))}
               </ul>
@@ -55,8 +56,22 @@ export function AddToList({ movie }) {
   );
 }
 
-AddToList.propTypes={
+AddToList.propTypes = {
   movie: PropTypes.object.isRequired,
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
+  getMyLists: PropTypes.func.isRequired,
+  addMovieToAList: PropTypes.func.isRequired,
+};
+
+function mapStateToProps() {
+  return {};
 }
+
+const mapDispatchToProps = {
+  getMyLists,
+  addMovieToAList,
+};
+
+const connectedStateAndProps = connect(mapStateToProps, mapDispatchToProps);
+export default connectedStateAndProps(AddToList);

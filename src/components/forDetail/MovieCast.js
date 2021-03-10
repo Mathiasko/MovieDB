@@ -1,19 +1,15 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { connect } from "react-redux";
 import { personDetailFetch } from "../../redux/actions/detailPersonActions";
 import PropTypes from "prop-types";
 
+const MovieCast= ({ movieCast, setPersontoggle, personDetailFetch }) => {
+  const profileUrl = "https://image.tmdb.org/t/p/w185/";
 
-
-export function MovieCast({movieCast, setPersontoggle}) {
-    const profileUrl = "https://image.tmdb.org/t/p/w185/";
-
-    const dispatch = useDispatch();
-    
-    const personDetailHandler = (personId) => {
-      dispatch(personDetailFetch(personId));
-      setPersontoggle(true);
-    };
+  const personDetailHandler = (personId) => {
+    personDetailFetch(personId);
+    setPersontoggle(true);
+  };
 
   return (
     <>
@@ -49,5 +45,17 @@ export function MovieCast({movieCast, setPersontoggle}) {
 
 MovieCast.propTypes = {
   movieCast: PropTypes.array.isRequired,
-  setPersontoggle: PropTypes.func.isRequired
+  setPersontoggle: PropTypes.func.isRequired,
+  personDetailFetch: PropTypes.func.isRequired,
 };
+
+function mapStateToProps() {
+  return {};
+}
+
+const mapDispatchToProps = {
+  personDetailFetch,
+};
+
+const connectedStateAndProps = connect(mapStateToProps, mapDispatchToProps);
+export default connectedStateAndProps(MovieCast);

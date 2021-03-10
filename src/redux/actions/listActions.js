@@ -5,7 +5,7 @@ import {
   getListDetailUrl,
   getListsUrl,
   removeFromListUrl,
-} from "../../api";
+} from "../../api/apiUrl";
 import { errorHandler, successHandler } from "../../helper/Notification";
 import * as actionType from './actionTypes'
 

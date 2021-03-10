@@ -1,5 +1,5 @@
 import axios from "axios";
-import { searchMovieUrl } from "../../api";
+import { searchMovieUrl } from "../../api/apiUrl";
 import * as actionType from './actionTypes'
 
 export const searchMovie = (movieName) => async (dispatch) => {

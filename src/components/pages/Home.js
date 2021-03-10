@@ -1,18 +1,18 @@
 import { React, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { connect } from "react-redux";
 import { mainFetch } from "../../redux/actions/mainActions";
-import { Search } from "../forHome/Search";
+import Search from "../forHome/Search";
 import { TopRated } from "../forHome/TopRated";
 import { useMeasure, useWindowScroll, useWindowSize } from "react-use";
-import { Authenticate } from "../forHome/Authenticate";
-import { CreateList } from "../forHome/CreateList";
-import { MyLists } from "../forHome/MyLists";
+import Authenticate from "../forHome/Authenticate";
+import CreateList from "../forHome/CreateList";
+import MyLists from "../forHome/MyLists";
+import PropTypes from "prop-types";
 
-export function Home() {
-  const dispatch = useDispatch();
+const Home = ({ mainFetch, moviePage, setMoviePage }) => {
   useEffect(() => {
-    dispatch(mainFetch(moviePage));
-  });
+    mainFetch(moviePage);
+  }, [moviePage, mainFetch]);
 
   const { y: pageYOffest } = useWindowScroll();
   const [ref, { height }] = useMeasure();
@@ -21,7 +21,6 @@ export function Home() {
   let scrollHeight = height - windHeight + 96;
 
   const [toggleCreateList, setToggleCreateList] = useState(true);
-  const [moviePage, setMoviePage] = useState(1)
   return (
     <div ref={ref}>
       <div
@@ -30,9 +29,9 @@ export function Home() {
       />
 
       <div className="flex">
-        <TopRated moviePage={moviePage} setMoviePage={setMoviePage}/>
-        <Search />
-        <div className='flex-1'>
+        <TopRated moviePage={moviePage} setMoviePage={setMoviePage} />
+        <Search vec={"vec"} />
+        <div className="flex-1">
           <Authenticate />
           <div>
             <p
@@ -44,10 +43,27 @@ export function Home() {
             {toggleCreateList ? "" : <CreateList />}
           </div>
           <div className="mt-10">
-            <MyLists/>
+            <MyLists />
           </div>
         </div>
       </div>
     </div>
   );
+};
+
+Home.propTypes = {
+  mainFetch: PropTypes.func.isRequired,
+  moviePage: PropTypes.number.isRequired,
+  setMoviePage: PropTypes.func.isRequired
+};
+
+function mapStateToProps() {
+  return {};
 }
+
+const mapDispatchToProps = {
+  mainFetch,
+};
+
+const connectedStateAndProps = connect(mapStateToProps, mapDispatchToProps);
+export default connectedStateAndProps(Home);

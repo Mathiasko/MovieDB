@@ -1,10 +1,7 @@
 import * as actionType from '../actions/actionTypes'
-const initState = {
-  requestToken: [],
-  sessionId: [],
-};
+import initialState from './initialState'
 
-export const getNewToken = (state = initState, action) => {
+export const getNewToken = (state = initialState.authenticate, action) => {
   switch (action.type) {
     case actionType.GET_NEWTOKEN:
       return {

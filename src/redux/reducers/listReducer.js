@@ -1,11 +1,7 @@
 import * as actionType from '../actions/actionTypes'
-const initState = {
-  myNewList: [],
-  myLists: [],
-  movieInList: [],
-};
+import initialState from './initialState'
 
-export const listFetch = (state = initState, action) => {
+export const listFetch = (state = initialState.list, action) => {
   switch (action.type) {
     case actionType.POST_NEWLIST:
       return {

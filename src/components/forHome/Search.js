@@ -1,25 +1,23 @@
 import { React, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { searchMovie } from "../../redux/actions/searchMovieAction";
-import { MovieTab } from "../common/MovieTab";
+import { connect, useSelector } from "react-redux";
+import { searchMovie }  from "../../redux/actions/searchMovieAction";
+import MovieTab from "../common/MovieTab";
+import PropTypes from 'prop-types'
 
 
-export function Search() {
+const Search = ({searchMovie})=> {
   const [input, setInput] = useState("");
 
-  const dispatch = useDispatch()
-
   const changeHandler = (e) => {
- 
     setInput(e.target.value);
   };
 
   const handleSubmit = (e) =>{
     e.preventDefault();
-    dispatch(searchMovie(input));
+    searchMovie(input)
   }
 
-  const { results } = useSelector((state) => state.searchMovieFetch.searchMovie);
+  const  results  = useSelector((state) => state.searchMovie);
 
 
   return (
@@ -39,3 +37,19 @@ export function Search() {
     </div>
   );
 }
+
+Search.propTypes={
+  searchMovie: PropTypes.func.isRequired,
+}
+
+
+function mapStateToProps() {
+  return {};
+}
+
+const mapDispatchToProps = {
+  searchMovie
+};
+
+const connectedStateAndProps = connect(mapStateToProps, mapDispatchToProps);
+export default connectedStateAndProps(Search);

@@ -8,12 +8,12 @@ import {
   faInstagramSquare,
 } from "@fortawesome/free-brands-svg-icons";
 
-export function ExternalIds({
+export const ExternalIds =({
   imdb_id,
   facebook_id,
   instagram_id,
   twitter_id,
-}) {
+}) => {
   return (
     <>
       

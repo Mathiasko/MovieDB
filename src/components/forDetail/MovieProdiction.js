@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 export function MovieProduction({movie}) {
   const logoImageUrl = "https://image.tmdb.org/t/p/w92/";
-
+console.log(movie)
   return (
     <>
       {movie.production_companies.map((prod, index) => (

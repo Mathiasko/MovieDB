@@ -1,14 +1,17 @@
 import { React, useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getNewToken, getSessionID } from "../../redux/actions/authenticateActions";
+import { connect, useSelector } from "react-redux";
+import {
+  getNewToken,
+  getSessionID,
+} from "../../redux/actions/authenticateActions";
+import PropTypes from 'prop-types'
 
-export function Authenticate() {
-  const dispatch = useDispatch();
-
+const Authenticate = ({getNewToken,
+  getSessionID}) => {
   const newToken = useSelector((state) => state.getNewToken.requestToken);
 
   const handleAuth = () => {
-    dispatch(getNewToken());
+    getNewToken();
     setRedirect(true);
   };
 
@@ -19,7 +22,7 @@ export function Authenticate() {
       window.open(
         `https://www.themoviedb.org/authenticate/${newToken.request_token}`
       ); // ?redirect_to=http://localhost:3000/
-      setRedirect(false)
+      setRedirect(false);
     }
   }, [newToken.request_token, newToken.success, redirect]);
 
@@ -33,7 +36,7 @@ export function Authenticate() {
 
   const handleSession = () => {
     const requestToken = { request_token: newToken.request_token };
-    dispatch(getSessionID(requestToken));
+    getSessionID(requestToken);
   };
 
   return (
@@ -60,3 +63,20 @@ export function Authenticate() {
     </div>
   );
 }
+
+Authenticate.propTypes={
+  getNewToken: PropTypes.func.isRequired,
+  getSessionID: PropTypes.func.isRequired,
+}
+
+function mapStateToProps() {
+  return {};
+}
+
+const mapDispatchToProps = {
+  getNewToken,
+  getSessionID,
+};
+
+const connectedStateAndProps = connect(mapStateToProps, mapDispatchToProps);
+export default connectedStateAndProps(Authenticate);

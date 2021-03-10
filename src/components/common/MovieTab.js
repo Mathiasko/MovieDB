@@ -1,12 +1,12 @@
 import { React } from "react";
 import { Link } from "react-router-dom";
 import { clearMovieDetail } from "../../redux/actions/detailAction";
-import { useDispatch, useSelector } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { starRating } from "../../helper/starsRating";
 import { removeMoveFromList } from "../../redux/actions/listActions";
 import PropTypes from "prop-types";
 
-export const MovieTab = ({
+const MovieTab = ({
   title,
   genreid,
   rating,
@@ -15,6 +15,8 @@ export const MovieTab = ({
   poster,
   remove,
   listId,
+  removeMoveFromList,
+  clearMovieDetail
 }) => {
   const genre = (id) => {
     switch (id) {
@@ -88,25 +90,20 @@ export const MovieTab = ({
 
   const posterImageUrl = "https://image.tmdb.org/t/p/w92/";
 
-  const dispatch = useDispatch();
-
   const clearDetailHandler = () => {
-    dispatch(clearMovieDetail());
+    clearMovieDetail()
   };
   const sessionId = useSelector((state) => state.getNewToken.sessionId);
 
-  const removeMovieHandler=()=> {
-    const payload={media_id:movieID}
-    dispatch(
-      removeMoveFromList(listId, sessionId.session_id, payload)
-    )
-    console.log('dasdojb')
-  }
+  const removeMovieHandler = () => {
+    const payload = { media_id: movieID };
+    removeMoveFromList(listId, sessionId.session_id, payload);
+  };
 
   return (
-    <div className="relative" >
+    <div className="relative">
       <Link to={`/detail/${movieID}`} onClick={clearDetailHandler}>
-        <div className="flex my-2 bg-green-900" >
+        <div className="flex my-2 bg-green-900">
           <div>
             <img className="m-3" src={posterImageUrl + poster} alt="poster" />
           </div>
@@ -116,10 +113,10 @@ export const MovieTab = ({
               <p className="float-left mr-1">Genres:</p>
               <div className="inline-flex">
                 {genreid.map((data, index) => (
-                    <p className="ml-2" key={index}>
-                      {genre(data)}{" "}
-                    </p>
-                  ))}
+                  <p className="ml-2" key={index}>
+                    {genre(data)}{" "}
+                  </p>
+                ))}
               </div>
 
               <p>Rating: {starRating(rating)}</p>
@@ -143,15 +140,29 @@ export const MovieTab = ({
       )}
     </div>
   );
-}
+};
 
-MovieTab.propTypes={
+MovieTab.propTypes = {
   title: PropTypes.string.isRequired,
-  genreid: PropTypes.string.isRequired,
+  genreid: PropTypes.array.isRequired,
   rating: PropTypes.number.isRequired,
   lang: PropTypes.string.isRequired,
-  movieID: PropTypes.string.isRequired,
+  movieID: PropTypes.number.isRequired,
   poster: PropTypes.string.isRequired,
-  remove: PropTypes.string.isRequired,
-  listId: PropTypes.string.isRequired,
+  remove: PropTypes.bool,
+  listId: PropTypes.string,
+  removeMoveFromList: PropTypes.func.isRequired,
+  clearMovieDetail: PropTypes.func.isRequired,
+};
+
+function mapStateToProps() {
+  return {};
 }
+
+const mapDispatchToProps = {
+  removeMoveFromList,
+  clearMovieDetail
+};
+
+const connectedStateAndProps = connect(mapStateToProps, mapDispatchToProps);
+export default connectedStateAndProps(MovieTab);

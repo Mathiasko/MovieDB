@@ -1,5 +1,5 @@
 import axios from "axios";
-import { personDetailUrl } from "../../api";
+import { personDetailUrl } from "../../api/apiUrl";
 import * as actionType from './actionTypes'
 
 export const personDetailFetch = (personId) => async (dispatch) => {

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { newTokenUrl, sessionIdUrl } from "../../api";
+import { newTokenUrl, sessionIdUrl } from "../../api/apiUrl";
 import * as actionType from './actionTypes'
 
 export const getNewToken = () => async (dispatch) => {

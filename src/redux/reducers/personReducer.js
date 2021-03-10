@@ -1,9 +1,7 @@
 import * as actionType from '../actions/actionTypes'
-const initState = {
-  personDetail: [],
-};
+import initialState from './initialState'
 
-export const personFetch = (state = initState, action) => {
+export const personFetch = (state = initialState.personDetail, action) => {
   switch (action.type) {
     case actionType.FETCH_PERSON:
       return {

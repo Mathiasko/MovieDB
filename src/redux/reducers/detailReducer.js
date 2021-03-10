@@ -1,15 +1,13 @@
-import * as actionType from '../actions/actionTypes'
+import * as actionType from "../actions/actionTypes";
+import initialState from "./initialState";
 
-const initState = {
-  
-};
-
-export const detailFetch = (state = initState, action) => {
+export const detailFetch = (state = initialState.detail, action) => {
   switch (action.type) {
     case actionType.FETCH_DETAIL:
+      // console.log(action)
       return {
         ...state,
-        movieDetail: action.payload.movieDetail,
+        movieDetail: action.movie,
       };
     case actionType.FETCH_EXTERNALIDS:
       return {

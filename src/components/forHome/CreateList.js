@@ -1,8 +1,9 @@
 import { React, useState } from "react";
 import { connect, useSelector } from "react-redux";
 import { postNewList } from "../../redux/actions/listActions";
+import PropTypes from 'prop-types'
 
-export const CreateList = () => {
+const CreateList = ({postNewList}) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setList((prevList) => ({
@@ -58,6 +59,10 @@ export const CreateList = () => {
 };
 
 
+CreateList.propTypes={
+  postNewList: PropTypes.func.isRequired,
+}
+
 
 function mapStateToProps() {
   return {};
@@ -69,3 +74,4 @@ const mapDispatchToProps = {
 
 const connectedStateAndProps = connect(mapStateToProps, mapDispatchToProps);
 export default connectedStateAndProps(CreateList);
+

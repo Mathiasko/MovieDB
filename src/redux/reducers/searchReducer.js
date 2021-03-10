@@ -1,10 +1,7 @@
 import * as actionType from '../actions/actionTypes'
+import initialState from './initialState'
 
-const initState = {
-  searchMovie: [],
-};
-
-export const searchMovieFetch = (state = initState, action) => {
+export const searchMovieFetch = (state = initialState.searchMovie, action) => {
   switch (action.type) {
     case actionType.FETCH_SEARCHMOVIE:
       return {

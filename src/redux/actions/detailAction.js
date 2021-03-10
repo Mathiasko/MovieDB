@@ -1,22 +1,38 @@
 import axios from "axios";
 import {
   movieCastUrl,
-  movieDetailUrl,
+  // movieDetailUrl,
   movieExternalUrl,
   movieRecommendationUrl,
-  movieReviewsUrl
-} from "../../api";
-import * as actionType from './actionTypes'
+  movieReviewsUrl,
+} from "../../api/apiUrl";
+import {movieDetail} from "../../api/movieDetailApi";
+import * as actionType from "./actionTypes";
 
-export const detailFetch = (id) => async (dispatch) => {
-  const movieDetail = await axios.get(movieDetailUrl(id));
-  dispatch({
-    type: actionType.FETCH_DETAIL,
-    payload: {
-      movieDetail: movieDetail.data,
-    },
-  });
-};
+export function detailFetchSuccess(movie) {
+  console.log('was here', movie)
+  return { type: actionType.FETCH_DETAIL, movie };
+}
+
+export const detailFetch = (id) => (dispatch) =>
+  movieDetail(id)
+    .then((movieDetail) => {
+      dispatch(detailFetchSuccess(movieDetail.data));
+    })
+    .catch((error) => {
+      throw error;
+    });
+
+// {
+//   const movieDetail =  axios.get(movieDetailUrl(id));
+
+//   dispatch({
+//     type: actionType.FETCH_DETAIL,
+//     payload: {
+//       movieDetail: movieDetail.data,
+//     },
+//   });
+// };
 
 export const externalIdsFetch = (id) => async (dispatch) => {
   const externalIds = await axios.get(movieExternalUrl(id));
@@ -53,7 +69,7 @@ export const reviewsFetch = (id) => async (dispatch) => {
   dispatch({
     type: actionType.FETCH_MOVIEREVIEWS,
     payload: {
-      movieReviews: movieReviews.data.results
+      movieReviews: movieReviews.data.results,
     },
   });
 };

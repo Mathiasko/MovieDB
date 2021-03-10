@@ -1,9 +1,7 @@
 import * as actionType from '../actions/actionTypes'
-const initState = {
-  topRatedMovies: [],
-};
+import initialState from './initialState'
 
-export const mainFetch = (state = initState, action) => {
+export const mainFetch = (state = initialState.topRatedMovies, action) => {
   switch (action.type) {
     case actionType.FETCH_MAIN:
       return {

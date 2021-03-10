@@ -2,9 +2,10 @@ import { React, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import PropTypes from "prop-types";
 
-import { MovieTab } from "../common/MovieTab";
+import MovieTab from "../common/MovieTab";
 import { MoviePage } from "./MoviePage";
 export function TopRatedMovie({ setMoviePage, moviePage }) {
+  
   const { topRatedMovies } = useSelector((state) => state.mainFetch);
 
   const windoww = useRef(null);

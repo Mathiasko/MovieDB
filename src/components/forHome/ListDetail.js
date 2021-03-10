@@ -1,14 +1,12 @@
 import { React, useState } from "react";
 import { useSelector } from "react-redux";
-import { MovieTab } from "../common/MovieTab";
+import MovieTab from "../common/MovieTab";
 import PropTypes from "prop-types";
 
 export function ListDetail({ toggleDetail }) {
   const list = useSelector((state) => state.listFetch.listDetail);
 
   const [editList, setEditList] = useState(false);
-
-
 
   return (
     <div className="relative text-white bg-opacity-40 bg-indigo-600 p-5">
@@ -54,7 +52,6 @@ export function ListDetail({ toggleDetail }) {
     </div>
   );
 }
-
 
 ListDetail.propTypes = {
   toggleDetail: PropTypes.func.isRequired,
