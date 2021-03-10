@@ -1,6 +1,6 @@
 import * as actionType from '../actions/actionTypes'
 import initialState from './initialState'
-//
+
 export const getNewToken = (state = initialState.authenticate, action) => {
   switch (action.type) {
     case actionType.GET_NEWTOKEN:
