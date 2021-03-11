@@ -3,8 +3,8 @@ export default {
   personDetail: [],
   searchMovie: [],
   authenticate: {
-    requestToken: [],
-    sessionId: [],
+    requestToken: {},
+    sessionId: {},
   },
   detail: {
     movieDetail: {},

@@ -12,7 +12,7 @@ const MyLists = ({ getMyLists, getListDetail }) => {
       : errorHandler("Session missing");
   };
 
-  const sessionId = useSelector((state) => state.getNewToken.sessionId);
+  const sessionId = useSelector((state) => state.authenticate.sessionId);
   const myLists = useSelector((state) => state.listFetch.myLists);
 
   const getListDetailHandler = (id) => {

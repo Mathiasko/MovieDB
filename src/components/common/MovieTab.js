@@ -93,7 +93,7 @@ const MovieTab = ({
   const clearDetailHandler = () => {
       clearMovieDetail()
   };
-  const sessionId = useSelector((state) => state.getNewToken.sessionId);
+  const sessionId = useSelector((state) => state.authenticate.sessionId);
 
   const removeMovieHandler = () => {
     const payload = { media_id: movieID };

@@ -1,15 +1,12 @@
 import { React, useState, useEffect } from "react";
-import { connect, useSelector } from "react-redux";
+import { connect } from "react-redux";
 import {
   getNewToken,
-  getSessionID,
+  getSessionId,
 } from "../../redux/actions/authenticateActions";
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types";
 
-const Authenticate = ({getNewToken,
-  getSessionID}) => {
-  const newToken = useSelector((state) => state.getNewToken.requestToken);
-
+const Authenticate = ({ getNewToken, getSessionId, requestTokenObj }) => {
   const handleAuth = () => {
     getNewToken();
     setRedirect(true);
@@ -18,16 +15,16 @@ const Authenticate = ({getNewToken,
   const [redirect, setRedirect] = useState(false);
 
   useEffect(() => {
-    if (newToken.success === true && redirect === true) {
+    if (requestTokenObj.success === true && redirect === true) {
       window.open(
-        `https://www.themoviedb.org/authenticate/${newToken.request_token}`
+        `https://www.themoviedb.org/authenticate/${requestTokenObj.request_token}`
       ); // ?redirect_to=http://localhost:3000/
       setRedirect(false);
     }
-  }, [newToken.request_token, newToken.success, redirect]);
+  }, [requestTokenObj.request_token, requestTokenObj.success, redirect]);
 
   const check = () => {
-    if (newToken.success === true) {
+    if (requestTokenObj.success === true) {
       return <p>Success</p>;
     } else {
       return <p>No Request token</p>;
@@ -35,8 +32,8 @@ const Authenticate = ({getNewToken,
   };
 
   const handleSession = () => {
-    const requestToken = { request_token: newToken.request_token };
-    getSessionID(requestToken);
+    const requestToken = { request_token: requestTokenObj.request_token };
+    getSessionId(requestToken);
   };
 
   return (
@@ -52,7 +49,7 @@ const Authenticate = ({getNewToken,
           Authenticate!
         </button>
         <button
-          disabled={!newToken.success}
+          disabled={!requestTokenObj.success}
           className="text-white text-2xl text-center p-5 bg-gray-600 rounded-xl mt-14"
           onClick={handleSession}
         >
@@ -62,20 +59,22 @@ const Authenticate = ({getNewToken,
       </div>
     </div>
   );
-}
+};
 
-Authenticate.propTypes={
+Authenticate.propTypes = {
   getNewToken: PropTypes.func.isRequired,
-  getSessionID: PropTypes.func.isRequired,
-}
+  getSessionId: PropTypes.func.isRequired,
+  requestTokenObj: PropTypes.object.isRequired,
+};
 
-function mapStateToProps() {
-  return {};
+function mapStateToProps(state) {
+  const requestTokenObj = state.authenticate.requestToken;
+  return { requestTokenObj };
 }
 
 const mapDispatchToProps = {
   getNewToken,
-  getSessionID,
+  getSessionId,
 };
 
 const connectedStateAndProps = connect(mapStateToProps, mapDispatchToProps);
