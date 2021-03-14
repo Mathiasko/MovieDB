@@ -1,25 +1,28 @@
 import { React, useState } from "react";
-import { connect, useSelector } from "react-redux";
-import { addMovieToAList, getMyLists } from "../../redux/actions/listActions";
+import { connect } from "react-redux";
+import { addMovieToAList, fetchMyLists } from "../../redux/actions/listActions";
 import { errorHandler } from "../../helper/Notification";
 import PropTypes from "prop-types";
 
-const AddToList =({ movie, getMyLists, addMovieToAList }) => {
+const AddToList = ({
+  movie,
+  fetchMyLists,
+  addMovieToAList,
+  sessionId,
+  myLists,
+}) => {
   const getListsHandler = () => {
-    sessionId.session_id ? successAdd() : errorHandler("Session missing");
+    sessionId ? successAdd() : errorHandler("Session missing");
   };
 
   function successAdd() {
-    getMyLists(sessionId.session_id);
+    fetchMyLists(sessionId);
     setAddToList(true);
   }
 
-  const myLists = useSelector((state) => state.listFetch.myLists);
-  const sessionId = useSelector((state) => state.getNewToken.sessionId);
-
   const addMovieToListHandler = (listId) => {
     const movieId = { media_id: movie.id };
-    addMovieToAList(listId, sessionId.session_id, movieId);
+    addMovieToAList(listId, sessionId, movieId);
   };
 
   const [addToList, setAddToList] = useState(false);
@@ -54,22 +57,26 @@ const AddToList =({ movie, getMyLists, addMovieToAList }) => {
       )}
     </div>
   );
-}
+};
 
 AddToList.propTypes = {
   movie: PropTypes.object.isRequired,
   id: PropTypes.number,
   title: PropTypes.string,
-  getMyLists: PropTypes.func.isRequired,
+  fetchMyLists: PropTypes.func.isRequired,
   addMovieToAList: PropTypes.func.isRequired,
+  sessionId: PropTypes.string,
+  myLists: PropTypes.array,
 };
 
-function mapStateToProps() {
-  return {};
+function mapStateToProps(state) {
+  const sessionId = state.authenticate.sessionId.session_id;
+  const myLists = state.listFetch.myLists;
+  return { sessionId, myLists };
 }
 
 const mapDispatchToProps = {
-  getMyLists,
+  fetchMyLists,
   addMovieToAList,
 };
 

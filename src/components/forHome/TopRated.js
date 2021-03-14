@@ -1,5 +1,5 @@
 import { React } from "react";
-import { TopRatedMovie } from "../forHome/TopRatedMovie";
+import TopRatedMovie from "../forHome/TopRatedMovie";
 import PropTypes from "prop-types";
 
 export function TopRated({ setMoviePage, moviePage }) {
@@ -17,5 +17,5 @@ export function TopRated({ setMoviePage, moviePage }) {
 
 TopRated.propTypes = {
   setMoviePage: PropTypes.func.isRequired,
-  moviePage: PropTypes.number.isRequired
+  moviePage: PropTypes.number.isRequired,
 };

@@ -1,9 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
-import { personDetailFetch } from "../../redux/actions/detailPersonActions";
+import { personDetailFetch } from "../../redux/actions/personDetailActions";
 import PropTypes from "prop-types";
 
-const MovieCast= ({ movieCast, setPersontoggle, personDetailFetch }) => {
+const MovieCast = ({ movieCast, setPersontoggle, personDetailFetch }) => {
   const profileUrl = "https://image.tmdb.org/t/p/w185/";
 
   const personDetailHandler = (personId) => {
@@ -41,7 +41,7 @@ const MovieCast= ({ movieCast, setPersontoggle, personDetailFetch }) => {
         : ""}
     </>
   );
-}
+};
 
 MovieCast.propTypes = {
   movieCast: PropTypes.array.isRequired,

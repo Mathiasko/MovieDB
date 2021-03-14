@@ -16,22 +16,18 @@ export function MovieMeta({
       </p>
       <div className="flex">
         <p className="text-white text-xl">{runtime} min</p>
-        <p className="text-white text-xl ml-5 mb-2">
-          {vote_average * 10}%
-        </p>
+        <p className="text-white text-xl ml-5 mb-2">{vote_average * 10}%</p>
       </div>
-      <p className="text-white text-xl ">
-        Rating: {starRating(vote_average)}
-      </p>
+      <p className="text-white text-xl ">Rating: {starRating(vote_average)}</p>
       <p className="text-white text-xl mt-5 w-2/3">{overview}</p>
     </>
   );
 }
 
-MovieMeta.propTypes={
+MovieMeta.propTypes = {
   title: PropTypes.string.isRequired,
   release_date: PropTypes.string.isRequired,
   runtime: PropTypes.number.isRequired,
   vote_average: PropTypes.number.isRequired,
   overview: PropTypes.string.isRequired,
-}
+};

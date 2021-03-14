@@ -1,11 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-export function MovieProduction({production_companies}) {
+export function MovieProduction({ production_companies }) {
   const logoImageUrl = "https://image.tmdb.org/t/p/w92/";
   return (
     <>
-    {production_companies ? (production_companies.map((prod, index) => (
+      {production_companies
+        ? production_companies.map((prod, index) => (
             <div className="mr-5" key={index}>
               {prod.logo_path ? (
                 <div className="h-14 flex items-center" key={prod.id}>
@@ -27,12 +28,13 @@ export function MovieProduction({production_companies}) {
                 )}
               </div>
             </div>
-          ))) : ''}
+          ))
+        : ""}
     </>
   );
 }
 
 MovieProduction.propTypes = {
   production_companies: PropTypes.array.isRequired,
-  setPersontoggle: PropTypes.func.isRequired
+  setPersontoggle: PropTypes.func.isRequired,
 };

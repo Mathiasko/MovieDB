@@ -1,13 +1,15 @@
-import axios from "axios";
-import { searchMovieUrl } from "../../api/apiUrl";
-import * as actionType from './actionTypes'
+import * as actionType from "./actionTypes";
+import { searchMovie } from "../../api/apiCalls";
 
-export const searchMovie = (movieName) => async (dispatch) => {
-  const searchMovie = await axios.get(searchMovieUrl(movieName));
-  dispatch({
-    type: actionType.FETCH_SEARCHMOVIE,
-    payload: {
-        searchMovie: searchMovie.data
-    },
-  });
-};
+export function searchMovieSuccess(movies) {
+  return { type: actionType.FETCH_SEARCHMOVIE, movies };
+}
+
+export const searchMovieFetch = (movieName) => (dispatch) =>
+  searchMovie(movieName)
+    .then((searchMovie) => {
+      dispatch(searchMovieSuccess(searchMovie.data));
+    })
+    .catch((error) => {
+      throw error;
+    });

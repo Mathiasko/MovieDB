@@ -54,7 +54,7 @@ const Home = ({ mainFetch, moviePage, setMoviePage }) => {
 Home.propTypes = {
   mainFetch: PropTypes.func.isRequired,
   moviePage: PropTypes.number.isRequired,
-  setMoviePage: PropTypes.func.isRequired
+  setMoviePage: PropTypes.func.isRequired,
 };
 
 function mapStateToProps() {

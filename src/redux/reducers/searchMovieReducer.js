@@ -1,12 +1,15 @@
 import * as actionType from "../actions/actionTypes";
 import initialState from "./initialState";
 
-export const mainFetch = (state = initialState.mainFetch, action) => {
+export const searchMovieFetch = (
+  state = initialState.searchMovieFetch,
+  action
+) => {
   switch (action.type) {
-    case actionType.FETCH_MAIN:
+    case actionType.FETCH_SEARCHMOVIE:
       return {
         ...state,
-        topRatedMovies: action.topRatedMovies,
+        results: action.movies.results,
       };
     default:
       return { ...state };

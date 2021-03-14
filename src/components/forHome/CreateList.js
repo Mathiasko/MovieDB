@@ -1,9 +1,9 @@
 import { React, useState } from "react";
-import { connect, useSelector } from "react-redux";
+import { connect } from "react-redux";
 import { postNewList } from "../../redux/actions/listActions";
-import PropTypes from 'prop-types'
+import PropTypes from "prop-types";
 
-const CreateList = ({postNewList}) => {
+const CreateList = ({ postNewList, sessionId }) => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setList((prevList) => ({
@@ -18,16 +18,10 @@ const CreateList = ({postNewList}) => {
     language: "en",
   });
 
-  const sessionId = useSelector(
-    (state) => state.getNewToken.sessionId.session_id
-  );
-
   const handleSubmit = (e) => {
     e.preventDefault();
     postNewList(list, sessionId);
   };
-
-  console.log(list);
 
   return (
     <div className="">
@@ -58,14 +52,14 @@ const CreateList = ({postNewList}) => {
   );
 };
 
-
-CreateList.propTypes={
+CreateList.propTypes = {
   postNewList: PropTypes.func.isRequired,
-}
+  sessionId: PropTypes.string,
+};
 
-
-function mapStateToProps() {
-  return {};
+function mapStateToProps(state) {
+  const sessionId = state.authenticate.sessionId.session_id;
+  return { sessionId };
 }
 
 const mapDispatchToProps = {
@@ -74,4 +68,3 @@ const mapDispatchToProps = {
 
 const connectedStateAndProps = connect(mapStateToProps, mapDispatchToProps);
 export default connectedStateAndProps(CreateList);
-

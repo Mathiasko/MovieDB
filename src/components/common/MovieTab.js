@@ -1,9 +1,9 @@
 import { React } from "react";
 import { Link } from "react-router-dom";
 import { clearMovieDetail } from "../../redux/actions/detailAction";
-import { connect, useSelector } from "react-redux";
+import { connect } from "react-redux";
 import { starRating } from "../../helper/starsRating";
-import { removeMoveFromList } from "../../redux/actions/listActions";
+import { removeMovieFromList } from "../../redux/actions/listActions";
 import PropTypes from "prop-types";
 
 const MovieTab = ({
@@ -15,8 +15,9 @@ const MovieTab = ({
   poster,
   remove,
   listId,
-  removeMoveFromList,
-  clearMovieDetail
+  removeMovieFromList,
+  clearMovieDetail,
+  sessionId,
 }) => {
   const genre = (id) => {
     switch (id) {
@@ -91,13 +92,12 @@ const MovieTab = ({
   const posterImageUrl = "https://image.tmdb.org/t/p/w92/";
 
   const clearDetailHandler = () => {
-      clearMovieDetail()
+    clearMovieDetail();
   };
-  const sessionId = useSelector((state) => state.authenticate.sessionId);
 
   const removeMovieHandler = () => {
     const payload = { media_id: movieID };
-    removeMoveFromList(listId, sessionId.session_id, payload);
+    removeMovieFromList(listId, sessionId, payload);
   };
 
   return (
@@ -143,25 +143,27 @@ const MovieTab = ({
 };
 
 MovieTab.propTypes = {
-  title: PropTypes.string.isRequired,
-  genreid: PropTypes.array.isRequired,
-  rating: PropTypes.number.isRequired,
-  lang: PropTypes.string.isRequired,
+  title: PropTypes.string,
+  genreid: PropTypes.array,
+  rating: PropTypes.number,
+  lang: PropTypes.string,
   movieID: PropTypes.number.isRequired,
-  poster: PropTypes.string.isRequired,
+  poster: PropTypes.string,
   remove: PropTypes.bool,
   listId: PropTypes.string,
-  removeMoveFromList: PropTypes.func.isRequired,
+  removeMovieFromList: PropTypes.func.isRequired,
   clearMovieDetail: PropTypes.func.isRequired,
+  sessionId: PropTypes.string,
 };
 
-function mapStateToProps() {
-  return {};
+function mapStateToProps(state) {
+  const sessionId = state.authenticate.sessionId.session_id;
+  return { sessionId };
 }
 
 const mapDispatchToProps = {
-  removeMoveFromList,
-  clearMovieDetail
+  removeMovieFromList,
+  clearMovieDetail,
 };
 
 const connectedStateAndProps = connect(mapStateToProps, mapDispatchToProps);

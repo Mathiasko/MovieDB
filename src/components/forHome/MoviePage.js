@@ -29,5 +29,5 @@ export function MoviePage({ setMoviePage, moviePage }) {
 
 MoviePage.propTypes = {
   setMoviePage: PropTypes.func.isRequired,
-  moviePage: PropTypes.number.isRequired
+  moviePage: PropTypes.number.isRequired,
 };

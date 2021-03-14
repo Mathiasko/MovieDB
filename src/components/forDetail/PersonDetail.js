@@ -1,21 +1,25 @@
 import { React } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImdb } from "@fortawesome/free-brands-svg-icons";
-import { useSelector } from "react-redux";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-export function PersonDetail({closeWindow}) {
+const PersonDetail = ({ closeWindow, person }) => {
   const profileUrl = "https://image.tmdb.org/t/p/h632/";
 
-  const closeWindowHandler =() => {
-    closeWindow(false)
-  }
+  const closeWindowHandler = () => {
+    closeWindow(false);
+  };
 
-  const person = useSelector((state) => state.personFetch.personDetail);
   return (
     <div className="fixed w-2/3 bottom-12 right-28 bg-gray-700 text-gray-400">
       <div className="absolute top-0 right-0 ">
-        <button className="cursor-pointer text-3xl p-5 px-8" onClick={closeWindowHandler}>╳</button>
+        <button
+          className="cursor-pointer text-3xl p-5 px-8"
+          onClick={closeWindowHandler}
+        >
+          ╳
+        </button>
       </div>
       <div className="flex">
         <div className="w-80 m-5">
@@ -64,8 +68,19 @@ export function PersonDetail({closeWindow}) {
       </div>
     </div>
   );
-}
+};
 
 PersonDetail.propTypes = {
   closeWindow: PropTypes.func.isRequired,
+  person: PropTypes.object,
 };
+
+function mapStateToProps(state) {
+  const person = state.personFetch.personDetail;
+  return { person };
+}
+
+const mapDispatchToProps = {};
+
+const connectedStateAndProps = connect(mapStateToProps, mapDispatchToProps);
+export default connectedStateAndProps(PersonDetail);

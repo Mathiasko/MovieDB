@@ -2,7 +2,7 @@ import { React, useEffect, useState } from "react";
 import { connect } from "react-redux";
 
 import MovieTab from "../common/MovieTab";
-import { PersonDetail } from "../forDetail/PersonDetail";
+import PersonDetail from "../forDetail/PersonDetail";
 import { useParams } from "react-router-dom";
 import {
   detailFetch,
@@ -13,7 +13,7 @@ import {
 } from "../../redux/actions/detailAction";
 import { Review } from "../forDetail/Review";
 import AddToList from "../forDetail/AddToList";
-import { MovieProduction } from "../forDetail/MovieProdiction"
+import { MovieProduction } from "../forDetail/MovieProdiction";
 import { ExternalIds } from "../forDetail/ExternalIds";
 import MovieCast from "../forDetail/MovieCast";
 import { MovieMeta } from "../forDetail/MovieMeta";
@@ -69,7 +69,9 @@ const Detail = ({
               <p>Production:</p>
 
               <div className="flex mt-5">
-                <MovieProduction production_companies={movie.production_companies} />
+                <MovieProduction
+                  production_companies={movie.production_companies}
+                />
               </div>
             </div>
             <div className="text-white text-xl mt-10">

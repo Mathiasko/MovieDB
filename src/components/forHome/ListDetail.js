@@ -1,11 +1,9 @@
 import { React, useState } from "react";
-import { useSelector } from "react-redux";
+import { connect } from "react-redux";
 import MovieTab from "../common/MovieTab";
 import PropTypes from "prop-types";
 
-export function ListDetail({ toggleDetail }) {
-  const list = useSelector((state) => state.listFetch.listDetail);
-
+const ListDetail = ({ toggleDetail, list }) => {
   const [editList, setEditList] = useState(false);
 
   return (
@@ -51,8 +49,19 @@ export function ListDetail({ toggleDetail }) {
       )}
     </div>
   );
-}
+};
 
 ListDetail.propTypes = {
   toggleDetail: PropTypes.func.isRequired,
+  list: PropTypes.object,
 };
+
+function mapStateToProps(state) {
+  const list = state.listFetch.listDetail;
+  return { list };
+}
+
+const mapDispatchToProps = {};
+
+const connectedStateAndProps = connect(mapStateToProps, mapDispatchToProps);
+export default connectedStateAndProps(ListDetail);

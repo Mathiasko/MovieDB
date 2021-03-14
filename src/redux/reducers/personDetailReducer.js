@@ -1,5 +1,5 @@
-import * as actionType from '../actions/actionTypes'
-import initialState from './initialState'
+import * as actionType from "../actions/actionTypes";
+import initialState from "./initialState";
 
 export const personFetch = (state = initialState.personDetail, action) => {
   switch (action.type) {

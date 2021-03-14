@@ -1,5 +1,5 @@
-import * as actionType from '../actions/actionTypes'
-import initialState from './initialState'
+import * as actionType from "../actions/actionTypes";
+import initialState from "./initialState";
 
 export const authenticate = (state = initialState.authenticate, action) => {
   switch (action.type) {

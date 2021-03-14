@@ -1,22 +1,17 @@
 import { React, useState } from "react";
-import { connect, useSelector } from "react-redux";
-import { getListDetail, getMyLists } from "../../redux/actions/listActions";
+import { connect } from "react-redux";
+import { fetchListDetail, fetchMyLists } from "../../redux/actions/listActions";
 import { errorHandler } from "../../helper/Notification";
-import { ListDetail } from "./ListDetail";
+import ListDetail from "./ListDetail";
 import PropTypes from "prop-types";
 
-const MyLists = ({ getMyLists, getListDetail }) => {
+const MyLists = ({ fetchMyLists, fetchListDetail, sessionId, myLists }) => {
   const getListsHandler = () => {
-    sessionId.session_id
-      ? getMyLists(sessionId.session_id)
-      : errorHandler("Session missing");
+    sessionId ? fetchMyLists(sessionId) : errorHandler("Session missing");
   };
 
-  const sessionId = useSelector((state) => state.authenticate.sessionId);
-  const myLists = useSelector((state) => state.listFetch.myLists);
-
-  const getListDetailHandler = (id) => {
-    getListDetail(id);
+  const fetchListDetailHandler = (id) => {
+    fetchListDetail(id);
     setDetailToggle(true);
   };
 
@@ -35,7 +30,7 @@ const MyLists = ({ getMyLists, getListDetail }) => {
           <button
             key={list.id}
             className="text-white text-left p-3"
-            onClick={() => getListDetailHandler(list.id)}
+            onClick={() => fetchListDetailHandler(list.id)}
           >
             <p>Name: {list.name}</p>
             <p>Desc: {list.description}</p>
@@ -49,17 +44,21 @@ const MyLists = ({ getMyLists, getListDetail }) => {
   );
 };
 MyLists.propTypes = {
-  getMyLists: PropTypes.func.isRequired,
-  getListDetail: PropTypes.func.isRequired,
+  fetchMyLists: PropTypes.func.isRequired,
+  fetchListDetail: PropTypes.func.isRequired,
+  sessionId: PropTypes.string.isRequired,
+  myLists: PropTypes.array.isRequired,
 };
 
-function mapStateToProps() {
-  return {};
+function mapStateToProps(state) {
+  const sessionId = state.authenticate.sessionId.session_id;
+  const myLists = state.listFetch.myLists;
+  return { sessionId, myLists };
 }
 
 const mapDispatchToProps = {
-  getMyLists,
-  getListDetail,
+  fetchMyLists,
+  fetchListDetail,
 };
 
 const connectedStateAndProps = connect(mapStateToProps, mapDispatchToProps);

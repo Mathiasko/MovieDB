@@ -1,13 +1,15 @@
-import axios from "axios";
-import { topRatedMoviesUrl } from "../../api/apiUrl";
-import * as actionType from './actionTypes'
+import { topRatedMovies } from "../../api/apiCalls";
+import * as actionType from "./actionTypes";
 
-export const mainFetch = (page) => async (dispatch) => {
-  const topRatedMovies = await axios.get(topRatedMoviesUrl(page));
-  dispatch({
-    type: actionType.FETCH_MAIN,
-    payload: {
-      topRatedMovies: topRatedMovies.data.results,
-    },
-  });
-};
+export function topRatedMoviesSuccess(topRatedMovies) {
+  return { type: actionType.FETCH_MAIN, topRatedMovies };
+}
+
+export const mainFetch = (page) => (dispatch) =>
+  topRatedMovies(page)
+    .then((topRatedMovies) => {
+      dispatch(topRatedMoviesSuccess(topRatedMovies.data));
+    })
+    .catch((error) => {
+      throw error;
+    });

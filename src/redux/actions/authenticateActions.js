@@ -1,5 +1,3 @@
-import axios from "axios";
-import { sessionIdUrl } from "../../api/apiUrl";
 import * as actionType from "./actionTypes";
 import { newToken, sessionId } from "../../api/apiCalls";
 
@@ -28,13 +26,3 @@ export const getSessionId = (payload) => (dispatch) =>
     .catch((error) => {
       throw error;
     });
-
-export const getSessionID = (payload) => async (dispatch) => {
-  const sessionId = await axios.post(sessionIdUrl(), payload);
-  dispatch({
-    type: actionType.GET_SESSIONID,
-    payload: {
-      sessionId: sessionId.data,
-    },
-  });
-};

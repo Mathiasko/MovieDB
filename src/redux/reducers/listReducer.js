@@ -1,32 +1,33 @@
-import * as actionType from '../actions/actionTypes'
-import initialState from './initialState'
+import * as actionType from "../actions/actionTypes";
+import initialState from "./initialState";
 
 export const listFetch = (state = initialState.list, action) => {
   switch (action.type) {
     case actionType.POST_NEWLIST:
       return {
         ...state,
-        myNewList: action.payload.myNewList,
+        myNewList: action.newList,
       };
     case actionType.GET_MYLISTS:
       return {
         ...state,
-        myLists: action.payload.myLists.results,
+        myLists: action.myLists.results,
       };
     case actionType.GET_LISTSDETAIL:
       return {
         ...state,
-        listDetail: action.payload.listDetail,
+        listDetail: action.listDetail,
       };
     case actionType.POST_MOVIETOLIST:
       return {
         ...state,
-        movieInList: action.payload.movieInList,
+        movieInList: action.movieInList,
       };
     case actionType.POST_REMOVEMOVIEFROMLIST:
+      console.log(action);
       return {
         ...state,
-        movieInList: action.payload.movieInList,
+        movieInList: action.removeMovie,
       };
     default:
       return { ...state };
