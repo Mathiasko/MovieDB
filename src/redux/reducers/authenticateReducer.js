@@ -13,6 +13,13 @@ export const authenticate = (state = initialState.authenticate, action) => {
         ...state,
         sessionId: action.sessionId,
       };
+    case actionType.LOGOUT:
+      return {
+        ...state,
+        logOutSuccess: action.status.data.success,
+        sessionId:{},
+        requestToken: action.newToken={},
+      };
     default:
       return { ...state };
   }

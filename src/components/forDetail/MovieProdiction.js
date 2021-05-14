@@ -9,11 +9,11 @@ export function MovieProduction({ production_companies }) {
         ? production_companies.map((prod, index) => (
             <div className="mr-5" key={index}>
               {prod.logo_path ? (
-                <div className="h-14 flex items-center" key={prod.id}>
+                <div className="flex items-center h-20" key={prod.id}>
                   <img
                     src={`${logoImageUrl + prod.logo_path}`}
                     alt="logo"
-                    className="bg-white p-1"
+                    className="bg-white p-1 c_log"
                   />
                 </div>
               ) : (

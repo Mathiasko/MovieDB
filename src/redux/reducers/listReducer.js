@@ -24,11 +24,15 @@ export const listFetch = (state = initialState.list, action) => {
         movieInList: action.movieInList,
       };
     case actionType.POST_REMOVEMOVIEFROMLIST:
-      console.log(action);
       return {
         ...state,
         movieInList: action.removeMovie,
       };
+      case actionType.DELETE_LIST:
+        return{
+          ...state,
+          deletedList: action,
+        }
     default:
       return { ...state };
   }

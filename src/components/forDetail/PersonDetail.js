@@ -12,7 +12,9 @@ const PersonDetail = ({ closeWindow, person }) => {
   };
 
   return (
-    <div className="fixed w-2/3 bottom-12 right-28 bg-gray-700 text-gray-400">
+    <>
+    {person ? (
+      <div className="relative w-2/3  bg-gray-700 text-gray-400">
       <div className="absolute top-0 right-0 ">
         <button
           className="cursor-pointer text-3xl p-5 px-8"
@@ -67,6 +69,8 @@ const PersonDetail = ({ closeWindow, person }) => {
         </div>
       </div>
     </div>
+    ) : ''}
+    </>
   );
 };
 

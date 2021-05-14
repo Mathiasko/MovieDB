@@ -8,8 +8,10 @@ import Authenticate from "../forHome/Authenticate";
 import CreateList from "../forHome/CreateList";
 import MyLists from "../forHome/MyLists";
 import PropTypes from "prop-types";
+import LogOut from "../forHome/LogOut";
+import Spinner from "../common/spinner";
 
-const Home = ({ mainFetch, moviePage, setMoviePage }) => {
+const Home = ({ mainFetch, moviePage, setMoviePage, loading }) => {
   useEffect(() => {
     mainFetch(moviePage);
   }, [moviePage, mainFetch]);
@@ -22,32 +24,42 @@ const Home = ({ mainFetch, moviePage, setMoviePage }) => {
 
   const [toggleCreateList, setToggleCreateList] = useState(true);
   return (
-    <div ref={ref}>
-      <div
-        className="fixed top-1 left-0 h-3 bg-red-400 z-10"
-        style={{ right: `${100 - (pageYOffest / scrollHeight) * 100}%` }}
-      />
-
-      <div className="flex">
-        <TopRated moviePage={moviePage} setMoviePage={setMoviePage} />
-        <Search vec={"vec"} />
-        <div className="flex-1">
-          <Authenticate />
-          <div>
-            <p
-              className="inline-block cursor-pointer text-white p-3 mt-10 bg-gray-600 rounded-xl"
-              onClick={() => setToggleCreateList(!toggleCreateList)}
-            >
-              {toggleCreateList ? "Create List" : "Hide"}
-            </p>
-            {toggleCreateList ? "" : <CreateList />}
+    <>
+      {loading ? (
+        <Spinner />
+      ) : (
+        <div ref={ref}>
+          <div className="absolute top-5 right-5">
+            <LogOut />
           </div>
-          <div className="mt-10">
-            <MyLists />
+
+          <div
+            className="fixed top-1 left-0 h-3 bg-red-400 z-10"
+            style={{ right: `${100 - (pageYOffest / scrollHeight) * 100}%` }}
+          />
+
+          <div className="flex">
+            <TopRated moviePage={moviePage} setMoviePage={setMoviePage} />
+            <Search vec={"vec"} />
+            <div className="flex-1">
+              <Authenticate />
+              <div>
+                <p
+                  className="inline-block cursor-pointer text-white p-3 mt-10 bg-gray-600 rounded-xl"
+                  onClick={() => setToggleCreateList(!toggleCreateList)}
+                >
+                  {toggleCreateList ? "Create List" : "Hide"}
+                </p>
+                {toggleCreateList ? "" : <CreateList />}
+              </div>
+              <div className="mt-10">
+                <MyLists />
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 
@@ -55,10 +67,12 @@ Home.propTypes = {
   mainFetch: PropTypes.func.isRequired,
   moviePage: PropTypes.number.isRequired,
   setMoviePage: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
 };
 
-function mapStateToProps() {
-  return {};
+function mapStateToProps(state) {
+  const loading = state.apiCallsInProgress > 0;
+  return { loading };
 }
 
 const mapDispatchToProps = {

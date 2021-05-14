@@ -6,19 +6,7 @@ import { starRating } from "../../helper/starsRating";
 import { removeMovieFromList } from "../../redux/actions/listActions";
 import PropTypes from "prop-types";
 
-const MovieTab = ({
-  title,
-  genreid,
-  rating,
-  lang,
-  movieID,
-  poster,
-  remove,
-  listId,
-  removeMovieFromList,
-  clearMovieDetail,
-  sessionId,
-}) => {
+const MovieTab = ({ title, genreid, rating, lang, movieID, poster, remove, listId, removeMovieFromList, clearMovieDetail, sessionId, }) => {
   const genre = (id) => {
     switch (id) {
       case 28:
@@ -88,18 +76,14 @@ const MovieTab = ({
         return id;
     }
   };
-
   const posterImageUrl = "https://image.tmdb.org/t/p/w92/";
-
   const clearDetailHandler = () => {
     clearMovieDetail();
   };
-
   const removeMovieHandler = () => {
     const payload = { media_id: movieID };
     removeMovieFromList(listId, sessionId, payload);
   };
-
   return (
     <div className="relative">
       <Link to={`/detail/${movieID}`} onClick={clearDetailHandler}>
@@ -118,9 +102,7 @@ const MovieTab = ({
                   </p>
                 ))}
               </div>
-
               <p>Rating: {starRating(rating)}</p>
-
               <p>Language: {lang.toUpperCase()}</p>
             </div>
           </div>
@@ -128,10 +110,7 @@ const MovieTab = ({
       </Link>
       {remove ? (
         <div>
-          <button
-            className="absolute top-10 -right-0 p-5 cursor-pointer"
-            onClick={removeMovieHandler}
-          >
+          <button className="absolute top-10 -right-0 p-5 cursor-pointer" onClick={removeMovieHandler} >
             ╳
           </button>
         </div>

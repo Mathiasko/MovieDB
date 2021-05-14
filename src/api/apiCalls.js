@@ -2,6 +2,8 @@ import axios from "axios";
 import {
   addToListUrl,
   createListUrl,
+  deleteListUrl,
+  deleteSessionUrl,
   getListDetailUrl,
   getListsUrl,
   movieCastUrl,
@@ -15,7 +17,6 @@ import {
   sessionIdUrl,
   topRatedMoviesUrl,
 } from "./apiUrl";
-
 // MAIN CALLS
 export async function topRatedMovies(page) {
   return await axios.get(topRatedMoviesUrl(page));
@@ -51,6 +52,12 @@ export async function sessionId(payload) {
   return await axios.post(sessionIdUrl(), payload);
 }
 
+// LOG OUT
+
+export async function deleteSessionId(payload){
+  return await axios.delete(deleteSessionUrl(), payload)
+}
+
 // SEARCH MOVIE
 
 export async function searchMovie(movieName) {
@@ -76,4 +83,8 @@ export async function movieInList(listId, sessionId, payload) {
 
 export async function removeMovie(listId, sessionId, payload) {
   return await axios.post(removeFromListUrl(listId, sessionId), payload);
+}
+
+export async function deleteList(listId, sessionId) {
+  return await axios.delete(deleteListUrl(listId, sessionId));
 }

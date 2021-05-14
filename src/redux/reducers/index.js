@@ -5,7 +5,7 @@ import { searchMovieFetch } from "./searchMovieReducer";
 import { personFetch } from "./personDetailReducer";
 import { authenticate } from "./authenticateReducer";
 import { listFetch } from "./listReducer";
-
+import  apiCallsInProgress  from "./apiStatusReducer";
 export const rootReducer = combineReducers({
   mainFetch,
   detailFetch,
@@ -13,4 +13,5 @@ export const rootReducer = combineReducers({
   personFetch,
   authenticate,
   listFetch,
+  apiCallsInProgress
 });

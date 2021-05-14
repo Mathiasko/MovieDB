@@ -1,13 +1,17 @@
-import React, { useMemo } from "react";
-import { errorHandler, successHandler } from "../../helper/Notification";
+import React, { useEffect, useMemo } from "react";
+import { errorHandler, successHandler, infoHandler } from "../../helper/Notification";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
+
 const NotificationCenter = ({ sessionSuccess, newListData, tokenSuccess }) => {
-  useMemo(() => {
-    if (sessionSuccess) {
-      successHandler("Session ID granted");
-    }
+
+  // const [success, setSuccess] = useState(false)
+  
+  useEffect(() => {
+    console.log();
+    sessionSuccess ? successHandler("Session ID granted") : infoHandler("session Id removed")
+
   }, [sessionSuccess]);
 
   if (newListData === true) {

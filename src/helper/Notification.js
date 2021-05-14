@@ -14,6 +14,20 @@ export const successHandler = (desc) => {
   });
 };
 
+export const infoHandler = (desc) => {
+  store.addNotification({
+    title: "Message:",
+    message: desc,
+    type: "info",
+    container: "top-right",
+    insert: "top",
+    dismiss: {
+      duration: 5000,
+      onScreen: true,
+    },
+  });
+}
+
 export const errorHandler = (desc) => {
   store.addNotification({
     title: desc,

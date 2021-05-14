@@ -7,6 +7,7 @@ import {
 import PropTypes from "prop-types";
 
 const Authenticate = ({ getNewToken, getSessionId, requestTokenObj }) => {
+  
   const handleAuth = () => {
     getNewToken();
     setRedirect(true);

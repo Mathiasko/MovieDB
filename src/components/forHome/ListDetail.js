@@ -2,9 +2,16 @@ import { React, useState } from "react";
 import { connect } from "react-redux";
 import MovieTab from "../common/MovieTab";
 import PropTypes from "prop-types";
+import { deleteThisList } from "../../redux/actions/listActions";
 
-const ListDetail = ({ toggleDetail, list }) => {
+
+const ListDetail = ({ toggleDetail, list, sessionId, deleteThisList }) => {
   const [editList, setEditList] = useState(false);
+
+  const deleteList = (listId) =>{
+    console.log(listId);
+    deleteThisList(listId, sessionId)
+  }
 
   return (
     <div className="relative text-white bg-opacity-40 bg-indigo-600 p-5">
@@ -26,6 +33,7 @@ const ListDetail = ({ toggleDetail, list }) => {
             <p className="text-xl">{list.name}</p>
             <p className="text-lg">{list.description}</p>
           </div>
+          {editList ? <div onClick={() => deleteList(list.id)} className=""> Delte this list</div> : ""}
           <div>
             {list.items
               ? list.items.map((movie) => (
@@ -53,15 +61,18 @@ const ListDetail = ({ toggleDetail, list }) => {
 
 ListDetail.propTypes = {
   toggleDetail: PropTypes.func.isRequired,
+  deleteThisList: PropTypes.func.isRequired,
+  sessionId: PropTypes.string,
   list: PropTypes.object,
 };
 
 function mapStateToProps(state) {
   const list = state.listFetch.listDetail;
-  return { list };
+  const sessionId = state.authenticate.sessionId.session_id
+  return { list, sessionId };
 }
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {deleteThisList};
 
 const connectedStateAndProps = connect(mapStateToProps, mapDispatchToProps);
 export default connectedStateAndProps(ListDetail);

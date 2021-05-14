@@ -4,6 +4,7 @@ import {
   getListDetail,
   movieInList,
   removeMovie,
+  deleteList,
 } from "../../api/apiCalls";
 import { errorHandler, successHandler } from "../../helper/Notification";
 import * as actionType from "./actionTypes";
@@ -23,11 +24,15 @@ export function movieInListSuccess(movieInList) {
 export function movieRemovedSuccess(movieRemoved) {
   return { type: actionType.POST_REMOVEMOVIEFROMLIST, movieRemoved };
 }
+export function listDeletedSuccess(listDeleted) {
+  return { type: actionType.DELETE_LIST, listDeleted };
+}
 
 export const postNewList = (list, sessionID) => (dispatch) =>
   createList(list, sessionID)
     .then((newList) => {
       dispatch(createListSuccess(newList.data));
+      fetchMyLists(sessionID)();
     })
     .catch((error) => {
       throw error;
@@ -67,6 +72,17 @@ export const removeMovieFromList = (listId, sessionId, payload) => (dispatch) =>
     .then((removeMovie) => {
       dispatch(movieRemovedSuccess(removeMovie.data));
       successHandler("Movie removed from list");
+    })
+    .catch((error) => {
+      errorHandler("Error");
+      throw error;
+    });
+
+export const deleteThisList = (listId, sessionId) => (dispatch) =>
+  deleteList(listId, sessionId)
+    .then((confirm) => {
+      dispatch(listDeletedSuccess(confirm.data));
+      successHandler("List deleted");
     })
     .catch((error) => {
       errorHandler("Error");
